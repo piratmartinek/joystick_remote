@@ -1,5 +1,6 @@
 {
     "name": "Joystick_Remote2",
+    "version": "0.0.1",
     "description": "",
     "dependencies": {
         "core": "*",
