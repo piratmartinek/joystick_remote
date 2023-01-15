@@ -35,6 +35,14 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
+    X = 1024 - pins.analogReadPin(AnalogPin.P2)
+    Y = pins.analogReadPin(AnalogPin.P1)
+    turn = Math.map(1024 - X, 0, 1023, -100, 100)
+    speed = Math.map(Y, 0, 1023, -100, 100)
+    radio.sendValue("left", Math.constrain(speed - turn, -100, 100))
+    radio.sendValue("right", Math.constrain(speed + turn, -100, 100))
+})
+basic.forever(function () {
     basic.clearScreen()
     if (Move == 0) {
         led.plot(2, 2)
@@ -94,12 +102,4 @@ basic.forever(function () {
         led.plot(2, 2)
     }
     basic.pause(10)
-})
-basic.forever(function () {
-    X = 1024 - pins.analogReadPin(AnalogPin.P2)
-    Y = pins.analogReadPin(AnalogPin.P1)
-    turn = Math.map(1024 - X, 0, 1023, -100, 100)
-    speed = Math.map(Y, 0, 1023, -100, 100)
-    radio.sendValue("left", Math.constrain(speed - turn, -100, 100))
-    radio.sendValue("right", Math.constrain(speed + turn, -100, 100))
 })
